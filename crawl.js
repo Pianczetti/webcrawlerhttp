@@ -56,6 +56,7 @@ function getURLsFromHTML(htmlBody, baseURL){
     const dom = new JSDOM(htmlBody)
     const linkElements = dom.window.document.querySelectorAll('a')
     for(const linkElement of linkElements){
+        if(!linkElement.href.includes('?q') && linkElement.href !== ''){
         if(linkElement.href.slice(0, 1) === '/'){
             try{
                 const urlObj = new URL(`${baseURL}${linkElement.href}`)
@@ -74,6 +75,7 @@ function getURLsFromHTML(htmlBody, baseURL){
             }
             
         }
+    }
         
     }
     return urls;
